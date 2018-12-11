@@ -56,17 +56,26 @@ int get (node *head){
 int delete(node *head, int val){
   int v = -1;
 
-  if(head == NULL) return v;
-  if(head -> prev != NULL){
-    v = head -> val;
-    if(v == val){
-      head -> prev -> next = head -> next;
-      head -> next -> prev = head -> prev;
-      free(head);
-      return v;
+  if(head -> isEmpty) return v;
+  v = head -> val;
+  if(v == val){
+    if(head -> prev != NULL){
+      if(head -> next != NULL){
+        head -> prev -> next = head -> next;
+        head -> next -> prev = head -> prev;
+        free(head);
+      } else {
+        // prev/next == o/x
+      }
     } else {
-      delete(head -> prev, val);
+      if(head -> next != NULL){
+        // prev/next == x/o
+      } else {
+        // prev/next == x/x
+      }
     }
+  } else {
+    delete(head -> prev, val);
   }
   return v;
 }
@@ -162,4 +171,5 @@ int main(int argc, char **argv){
   printf("should equal (\n");
   printf("2\n");
   printf("4\n)\n");
+  free(n);
 }
