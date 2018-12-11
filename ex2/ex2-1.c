@@ -115,6 +115,11 @@ int main(int argc, char **argv){
   for(i = 1; i < 8; i++) printf("%d\n", i);
   printf(")\n");
   printf("%d should equal (1)\n\n", get(n));
+  printf("-display\n");
+  display(n);
+  printf("should equal (\n");
+  for(i = 2; i < 8; i++) printf("%d\n", i);
+  printf(")\n");
 
   printf("\n--delete test--\n");
   printf("-delete 4\n");
@@ -137,7 +142,7 @@ int main(int argc, char **argv){
   printf("5\n");
   printf("7\n)\n");
 
-  printf("\n--get untill run out nodes--\n");
+  printf("\n--get until run out nodes--\n");
   printf("%d should equal (2)\n", get(n));
   printf("%d should equal (3)\n", get(n));
   printf("%d should equal (5)\n", get(n));
