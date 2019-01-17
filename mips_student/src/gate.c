@@ -26,10 +26,10 @@ void nand_circuit(Signal in1, Signal in2, Signal *out1)
 void xor_circuit(Signal in1, Signal in2, Signal *out1)
 {
     Signal not1, not2, upperand, lowerand;
-    not_gate(in1, not1);
-    not_gate(in2, not2);
-    and_gate(not1, in2, upperand);
-    and_gate(in1, not2, lowerand);
+    not_gate(in1, &not1);
+    not_gate(in2, &not2);
+    and_gate(not1, in2, &upperand);
+    and_gate(in1, not2, &lowerand);
     or_gate(upperand, lowerand, out1);
 }
 
@@ -79,6 +79,20 @@ void test_gate()
         for (b = 0; b <= 1; ++b) {
             nand_circuit(a, b, &out);
             printf("NAND(%d, %d) => %d\n", a, b, out);
+        }
+    }
+    /* OR Gate Test*/
+    for (a = 0; a <= 1; ++a) {
+        for (b = 0; b <= 1; ++b) {
+            or_gate(a, b, &out);
+            printf("OR(%d, %d) => %d\n", a, b, out);
+        }
+    }
+    /* XOR Gate Test*/
+    for (a = 0; a <= 1; ++a) {
+        for (b = 0; b <= 1; ++b) {
+            xor_circuit(a, b, &out);
+            printf("XOR(%d, %d) => %d\n", a, b, out);
         }
     }
 }
