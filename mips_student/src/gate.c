@@ -8,7 +8,7 @@ void and_gate(Signal in1, Signal in2, Signal *out1)
 
 void or_gate(Signal in1, Signal in2, Signal *out1)
 {
-    /* Exercise 5-1 */
+    *out1 = in1 || in2;
 }
 
 void not_gate(Signal in1, Signal *out1)
@@ -25,7 +25,12 @@ void nand_circuit(Signal in1, Signal in2, Signal *out1)
 
 void xor_circuit(Signal in1, Signal in2, Signal *out1)
 {
-    /* Exercise 5-1 */
+    Signal not1, not2, upperand, lowerand;
+    not_gate(in1, not1);
+    not_gate(in2, not2);
+    and_gate(not1, in2, upperand);
+    and_gate(in1, not2, lowerand);
+    or_gate(upperand, lowerand, out1);
 }
 
 void andn_gate(Signal *in1, int n, Signal *out1)
