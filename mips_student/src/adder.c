@@ -13,7 +13,13 @@ void full_adder(Signal in1, Signal in2, Signal carry_in, Signal *out1, Signal *c
 
 void rca(Word in1, Word in2, Signal carry_in, Word *out1, Signal *carry_out)
 {
-    /* Excercise 5-3 */
+    int i;
+    Signal innercarry;
+    innercarry = carry_in;
+    for(i = 0; i < 32; i++){
+      full_adder(in1.bit[i], in2.bit[i], innercarry, &out1->bit[i], &innercarry);
+    }
+    *carry_out = innercarry;
 }
 
 void test_full_adder()
@@ -31,5 +37,10 @@ void test_full_adder()
 
 void test_rca(int val1, int val2)
 {
-    /* Excercise 5-3 */
+    Signal cout;
+    Word w1, w2, out;
+    word_set_value(&w1, val1);
+    word_set_value(&w2, val2);
+    rca(w1, w2, 0, &out, &cout);
+    printf("%d + %d = %d (carry out: %d)\n", word_get_value(w1), word_get_value(w2), word_get_value(out), cout);
 }
